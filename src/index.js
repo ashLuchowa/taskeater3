@@ -1,5 +1,12 @@
 import "./styles.css";
 import { greeting } from "./dom/sideUI";
+import { ManageProject } from "./events/manageProjects";
 
 
-console.log(greeting);
+function initialiseApp() {
+    const result = ManageProject.projects;
+    ManageProject.pushDefaultProjects();
+    console.log(result);
+}
+
+initialiseApp();
