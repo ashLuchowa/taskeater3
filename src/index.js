@@ -1,5 +1,5 @@
 import "./styles.css";
-import { greeting } from "./test";
+import { greeting } from "./dom/sideUI";
 
 
 console.log(greeting);
