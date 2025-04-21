@@ -3,6 +3,7 @@ import { greeting } from "./dom/sideUI";
 import { ManageProject } from "./events/manageProjects";
 import { ManageTask } from "./events/manageTasks";
 import { generateSideUI } from "./dom/sideUI";
+import { generateMainUI } from "./dom/mainUI";
 
 
 function initialiseApp() {
@@ -18,6 +19,10 @@ function initialiseApp() {
     generateSideUI.renderLogo('Logo');
     generateSideUI.renderAddBtn('button', 'add-project-btn', 'Add Project');
     generateSideUI.renderProjectList();
+
+    // Init Main Content
+    generateMainUI.renderMainContainer();
+    generateMainUI.matchProject();
 }
 
 initialiseApp();
