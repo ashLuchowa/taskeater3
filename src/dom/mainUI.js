@@ -43,6 +43,7 @@ class MainUI {
                     this.renderContent('div', 'project-main-title', 'h1', targetItem.title);
                     this.renderAddBtn('button', 'project-main-button', 'Add Task');
                     this.renderContent('div', 'project-main-description', 'p', targetItem.description);
+                    this.renderTasks(targetItem.taskArray, 'task-box');
                 }
             });
         });
@@ -51,7 +52,7 @@ class MainUI {
     renderContent(elementType, className, innerElementType, target) {
         const contentContainer = document.createElement(elementType);
         contentContainer.classList.add(className);
-        
+
         const contentText = document.createElement(innerElementType);
         contentText.textContent = target;
 
@@ -64,6 +65,41 @@ class MainUI {
         // Append contents
         contentContainer.appendChild(contentText);
         this.mainContainer.appendChild(contentContainer);
+    }
+
+    renderTasks(target, containerName) {
+        const container = document.createElement('div');
+        container.classList.add(containerName);
+
+        target.forEach(item => {
+            const outerTaskContainer = document.createElement('div');
+            outerTaskContainer.classList.add('outer-task-container');
+
+            function generateTaskInfo(containerName, type, content, textType) {
+                const innerContainer = document.createElement('div');
+                innerContainer.classList.add(containerName);
+
+                const taskText = document.createElement(type);
+                taskText.textContent = `${textType} ${content}`;
+
+                container.appendChild(outerTaskContainer);
+                outerTaskContainer.appendChild(innerContainer);
+                innerContainer.appendChild(taskText);
+            }
+
+            generateTaskInfo('task-title', 'p', item.title, '');
+            generateTaskInfo('task-description', 'p', item.description, '');
+            generateTaskInfo('task-date', 'p', item.dueDate, 'Due Date: ');
+            generateTaskInfo('task-priority', 'p', item.priority, 'Priority: ');
+        });
+
+        // Prevent Duplication
+        const existingContainer = document.querySelector('.task-box');
+        if (existingContainer) {
+            existingContainer.remove();
+        }
+
+        this.mainContainer.appendChild(container);
     }
 }
 
