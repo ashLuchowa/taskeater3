@@ -48,4 +48,16 @@ table {
 	border-spacing: 0;
 }
 
-/*--------- RESET CSS ---------*/
+/*--------- MAIN ---------*/
+.content {
+  background-color: aqua;
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  height: 100vh;
+  width: 100vw;
+}
+
+/*--------- SIDEBAR ---------*/
+.side-container {
+  background-color: aquamarine;
+}
