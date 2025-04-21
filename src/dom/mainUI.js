@@ -10,7 +10,6 @@ class MainUI {
     renderMainContainer() {
         this.mainContainer = document.createElement('div');
         this.mainContainer.classList.add(this.mainSelector);
-        this.mainContainer.textContent = 'test';
 
         this.outerContainer.appendChild(this.mainContainer);
     }
@@ -23,11 +22,27 @@ class MainUI {
                     return itemProject.title === e.target.textContent;
                 });
 
-                if(targetItem) {
-                    console.log(targetItem);
+                if (targetItem) {
+                    this.renderContent(targetItem.title);
                 }
             });
         });
+    }
+
+    renderContent(target) {
+        const mainContentContainer = document.createElement('div');
+        mainContentContainer.classList.add('main-content');
+        mainContentContainer.textContent = target;
+
+        const existingContent = document.querySelector('.main-content');
+
+        // Clear content first
+        if (existingContent) {
+            existingContent.remove();
+        }
+
+        // Append content
+        this.mainContainer.appendChild(mainContentContainer);
     }
 }
 
