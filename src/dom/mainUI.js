@@ -23,26 +23,26 @@ class MainUI {
                 });
 
                 if (targetItem) {
-                    this.renderContent(targetItem.title);
+                    this.renderContent('div', 'project-title', targetItem.title);
+                    this.renderContent('div', 'project-description', targetItem.description);
                 }
             });
         });
     }
 
-    renderContent(target) {
-        const mainContentContainer = document.createElement('div');
-        mainContentContainer.classList.add('main-content');
-        mainContentContainer.textContent = target;
-
-        const existingContent = document.querySelector('.main-content');
+    renderContent(elementType, className, target) {
+        const contentContainer = document.createElement(elementType);
+        contentContainer.classList.add(className);
+        contentContainer.textContent = target;
 
         // Clear content first
+        const existingContent = document.querySelector(`.${className}`);
         if (existingContent) {
             existingContent.remove();
         }
 
         // Append content
-        this.mainContainer.appendChild(mainContentContainer);
+        this.mainContainer.appendChild(contentContainer);
     }
 }
 
