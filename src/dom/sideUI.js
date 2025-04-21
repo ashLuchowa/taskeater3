@@ -86,9 +86,9 @@ class SideUI {
             const existingContainer = document.querySelector('.project-form-container');
             if (existingContainer) {
                 existingContainer.remove();
+            } else {
+                this.outerContainer.appendChild(formContainer);
             }
-
-            this.outerContainer.appendChild(formContainer);
 
             generateFormDetails('title', 'form-title', 'label', 'Title: ', 'input', 'text');
             generateFormDetails('description', 'form-description', 'label', 'Description: ', 'input', 'text');
