@@ -14,6 +14,23 @@ class MainUI {
         this.outerContainer.appendChild(this.mainContainer);
     }
 
+    renderAddBtn(type, selectorName, nameContent) {
+        const addBtnContainer = document.createElement('div');
+        addBtnContainer.classList.add(selectorName);
+
+        const addBtn = document.createElement(type);
+        addBtn.textContent = nameContent;
+
+        // Prevent duplication
+        const existingBtn = document.querySelector(`.${selectorName}`);
+        if (existingBtn) {
+            existingBtn.remove();
+        }
+
+        addBtnContainer.appendChild(addBtn);
+        this.mainContainer.appendChild(addBtnContainer);
+    }
+
     matchProject() {
         const targetList = document.querySelectorAll('.project-list-item');
         targetList.forEach(item => {
@@ -23,17 +40,20 @@ class MainUI {
                 });
 
                 if (targetItem) {
-                    this.renderContent('div', 'project-title', targetItem.title);
-                    this.renderContent('div', 'project-description', targetItem.description);
+                    this.renderContent('div', 'project-main-title', 'h1', targetItem.title);
+                    this.renderAddBtn('button', 'project-main-button', 'Add Task');
+                    this.renderContent('div', 'project-main-description', 'p', targetItem.description);
                 }
             });
         });
     }
 
-    renderContent(elementType, className, target) {
+    renderContent(elementType, className, innerElementType, target) {
         const contentContainer = document.createElement(elementType);
         contentContainer.classList.add(className);
-        contentContainer.textContent = target;
+        
+        const contentText = document.createElement(innerElementType);
+        contentText.textContent = target;
 
         // Clear content first
         const existingContent = document.querySelector(`.${className}`);
@@ -41,7 +61,8 @@ class MainUI {
             existingContent.remove();
         }
 
-        // Append content
+        // Append contents
+        contentContainer.appendChild(contentText);
         this.mainContainer.appendChild(contentContainer);
     }
 }
