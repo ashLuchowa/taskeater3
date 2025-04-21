@@ -25,12 +25,16 @@ export class ManageProject {
         });
     }
 
-    // Push New Projects
+    // Push New Projects (Demo)
     static pushNewProjects() {
         // Clear array first
         this.projects.length = 0;
 
-        // Push Default projects again
+        // Push default projects again
         ManageProject.pushDefaultProjects();
+
+        // Push new project
+        const project1 = new Project('Apply TAFE', 'Diploma of IT (BackEnd)', 'add-task-btn', []);
+        this.projects.push(project1);
     }
 }
