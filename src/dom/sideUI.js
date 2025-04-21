@@ -56,6 +56,46 @@ class SideUI {
         projectListContainer.appendChild(projectItemMain);
         this.sideContainer.appendChild(projectListContainer);
     }
+
+    initialiseForm() {
+        const button = document.querySelector('.add-project-btn');
+        button.addEventListener('click', () => {
+            const formContainer = document.createElement('form');
+            formContainer.classList.add('project-form-container');
+
+            function generateFormDetails(name, className, elementLabel, labelText, elementInput, inputType) {
+                const outerFormItem = document.createElement('div');
+                outerFormItem.classList.add(className);
+
+                // Label
+                const containerLabel = document.createElement(elementLabel);
+                containerLabel.textContent = labelText;
+                containerLabel.setAttribute('for', name);
+                // Input
+                const containerInput = document.createElement(elementInput);
+                containerInput.setAttribute('type', inputType);
+                containerInput.setAttribute('id', name);
+                containerInput.setAttribute('name', name);
+
+                outerFormItem.appendChild(containerLabel);
+                outerFormItem.appendChild(containerInput);
+                formContainer.appendChild(outerFormItem);
+            }
+
+            // Prevent duplication
+            const existingContainer = document.querySelector('.project-form-container');
+            if (existingContainer) {
+                existingContainer.remove();
+            }
+
+            this.outerContainer.appendChild(formContainer);
+
+            generateFormDetails('title', 'form-title', 'label', 'Title: ', 'input', 'text');
+            generateFormDetails('description', 'form-description', 'label', 'Description: ', 'input', 'text');
+            generateFormDetails('date', 'form-date', 'label', 'Due Date: ', 'input', 'date');
+            generateFormDetails('submit', 'form-submit', 'label', '', 'input', 'submit');
+        });
+    }
 }
 
 export const generateSideUI = new SideUI('.content', 'side-container');

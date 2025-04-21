@@ -1,5 +1,4 @@
 import "./styles.css";
-import { greeting } from "./dom/sideUI";
 import { ManageProject } from "./events/manageProjects";
 import { ManageTask } from "./events/manageTasks";
 import { generateSideUI } from "./dom/sideUI";
@@ -19,6 +18,7 @@ function initialiseApp() {
     generateSideUI.renderLogo('Logo');
     generateSideUI.renderAddBtn('button', 'add-project-btn', 'Add Project');
     generateSideUI.renderProjectList();
+    generateSideUI.initialiseForm();
 
     // Init Main Content
     generateMainUI.renderMainContainer();
