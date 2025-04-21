@@ -20,8 +20,8 @@ export class ManageProject {
 
     // Push Default Projects in projects Array
     static pushDefaultProjects() {
-        this.defaultProjects.forEach(x => {
-            this.projects.push(x);
+        this.defaultProjects.forEach(itemProject => {
+            this.projects.push(itemProject);
         });
     }
 
