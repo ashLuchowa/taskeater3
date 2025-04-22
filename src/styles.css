@@ -89,4 +89,6 @@ table {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
 }/*# sourceMappingURL=styles.css.map */

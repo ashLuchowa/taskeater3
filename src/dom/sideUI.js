@@ -63,6 +63,11 @@ class SideUI {
             const formContainer = document.createElement('form');
             formContainer.classList.add('project-form-container');
 
+            // Form header
+            const formHeader = document.createElement('legend');
+            formHeader.textContent = 'Add Project';
+            formContainer.appendChild(formHeader);
+
             function generateFormDetails(name, className, elementLabel, labelText, elementInput, inputType) {
                 const outerFormItem = document.createElement('div');
                 outerFormItem.classList.add(className);
@@ -92,7 +97,6 @@ class SideUI {
 
             generateFormDetails('title', 'form-title', 'label', 'Title: ', 'input', 'text');
             generateFormDetails('description', 'form-description', 'label', 'Description: ', 'input', 'text');
-            generateFormDetails('date', 'form-date', 'label', 'Due Date: ', 'input', 'date');
             generateFormDetails('submit', 'form-submit', 'label', '', 'input', 'submit');
         });
     }
