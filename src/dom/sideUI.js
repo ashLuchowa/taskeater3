@@ -1,4 +1,6 @@
 import { ManageProject } from "../events/manageProjects";
+import { Project } from "../events/manageProjects";
+import { rebootApp } from "..";
 
 class SideUI {
     constructor(outerSelector, sideSelector) {
@@ -57,6 +59,13 @@ class SideUI {
         this.sideContainer.appendChild(projectListContainer);
     }
 
+    clearSideUI() {
+        const container = document.querySelector(`.${this.sideSelector}`);
+        if(container) {
+            container.remove();
+        }
+    }
+
     initialiseForm() {
         const button = document.querySelector('.add-project-btn');
         button.addEventListener('click', () => {
@@ -81,6 +90,7 @@ class SideUI {
                 containerInput.setAttribute('type', inputType);
                 containerInput.setAttribute('id', name);
                 containerInput.setAttribute('name', name);
+                containerInput.setAttribute('required', '');
 
                 outerFormItem.appendChild(containerLabel);
                 outerFormItem.appendChild(containerInput);
@@ -98,7 +108,30 @@ class SideUI {
             generateFormDetails('title', 'form-title', 'label', 'Title: ', 'input', 'text');
             generateFormDetails('description', 'form-description', 'label', 'Description: ', 'input', 'text');
             generateFormDetails('submit', 'form-submit', 'label', '', 'input', 'submit');
+
+            // Form Submit
+            formContainer.addEventListener('submit', (this.submitForm));
         });
+    }
+
+    submitForm = (e) => {
+        e.preventDefault();
+        const formContainer = document.querySelector('.project-form-container');
+        const getTitle = document.querySelector('#title');
+        const getDescription = document.querySelector('#description');
+        const project = new Project(getTitle.value, getDescription.value);
+
+        // Clear form after submit
+        formContainer.remove();
+
+        // Push project into array
+        ManageProject.projects.push(project);
+
+        // // Re-render SideUI
+        rebootApp();
+
+        console.log(project);
+        console.log(ManageProject.projects);
     }
 }
 

@@ -7,6 +7,13 @@ class MainUI {
         this.mainContainer = null;
     }
 
+    clearMainUI() {
+        const container = document.querySelector(`.${this.mainSelector}`);
+        if(container) {
+            container.remove();
+        }
+    }
+
     renderMainContainer() {
         this.mainContainer = document.createElement('div');
         this.mainContainer.classList.add(this.mainSelector);

@@ -1,8 +1,7 @@
-class Project {
-    constructor(title, description, button, taskArray = []) {
+export class Project {
+    constructor(title, description, taskArray = []) {
         this.title = title;
         this.description = description;
-        this.button = button;
         this.taskArray = taskArray;
     }
 }
@@ -12,10 +11,10 @@ export class ManageProject {
 
     // Default Projects
     static defaultProjects = [
-        new Project('Portfolio 2025', 'Website to feature all my work', 'add-task-btn', []),
-        new Project('Cleaning February', 'Cleaning duties around the house', 'add-task-btn', []),
-        new Project('Apply Jobs', 'Need to apply jobs', 'add-task-btn', []),
-        new Project('Hunting', 'I need to eat', 'add-task-btn', []),
+        new Project('Portfolio 2025', 'Website to feature all my work', []),
+        new Project('Cleaning February', 'Cleaning duties around the house', []),
+        new Project('Apply Jobs', 'Need to apply jobs', []),
+        new Project('Hunting', 'I need to eat', []),
     ];
 
     // Push Default Projects in projects Array
@@ -34,7 +33,7 @@ export class ManageProject {
         ManageProject.pushDefaultProjects();
 
         // Push new project
-        const project1 = new Project('Apply TAFE', 'Diploma of IT (BackEnd)', 'add-task-btn', []);
+        const project1 = new Project('Apply TAFE', 'Diploma of IT (BackEnd)', []);
         this.projects.push(project1);
     }
 }

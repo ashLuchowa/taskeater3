@@ -7,11 +7,9 @@ import { generateMainUI } from "./dom/mainUI";
 
 function initialiseApp() {
     // Push default projects and tasks into related arrays
-    const result = ManageProject.projects;
     ManageProject.pushDefaultProjects();
     ManageProject.pushNewProjects();
     ManageTask.pushTasks(ManageTask.defaultTasks);
-    console.log(result);
 
     // Init Sidebar
     generateSideUI.renderSideContainer();
@@ -21,6 +19,21 @@ function initialiseApp() {
     generateSideUI.initialiseForm();
 
     // Init Main Content
+    generateMainUI.renderMainContainer();
+    generateMainUI.matchProject();
+}
+
+export function rebootApp() {
+    // Sidebar
+    generateSideUI.clearSideUI();
+    generateSideUI.renderSideContainer();
+    generateSideUI.renderLogo('Logo');
+    generateSideUI.renderAddBtn('button', 'add-project-btn', 'Add Project');
+    generateSideUI.renderProjectList();
+    generateSideUI.initialiseForm();
+
+    // Main
+    generateMainUI.clearMainUI();
     generateMainUI.renderMainContainer();
     generateMainUI.matchProject();
 }
