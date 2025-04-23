@@ -21,11 +21,12 @@ class MainUI {
         this.outerContainer.appendChild(this.mainContainer);
     }
 
-    renderAddBtn(type, selectorName, nameContent) {
+    renderAddBtn(type, selectorName, className, nameContent) {
         const addBtnContainer = document.createElement('div');
         addBtnContainer.classList.add(selectorName);
 
         const addBtn = document.createElement(type);
+        addBtn.classList.add(className);
         addBtn.textContent = nameContent;
 
         // Prevent duplication
@@ -48,7 +49,7 @@ class MainUI {
 
                 if (targetItem) {
                     this.renderContent('div', 'project-main-title', 'h1', targetItem.title);
-                    this.renderAddBtn('button', 'project-main-button', 'Add Task');
+                    this.renderAddBtn('button', 'project-main-button', 'add-btn', 'Add Task');
                     this.renderContent('div', 'project-main-description', 'p', targetItem.description);
                     this.renderTasks(targetItem.taskArray, 'task-box');
                 }
@@ -107,6 +108,13 @@ class MainUI {
         }
 
         this.mainContainer.appendChild(container);
+    }
+
+    initialiseTaskForm() {
+        const container = document.querySelector('.add-btn');
+        container.addEventListener('click', () => {
+            console.log('works');
+        });
     }
 }
 

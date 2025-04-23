@@ -21,6 +21,13 @@ function initialiseApp() {
     // Init Main Content
     generateMainUI.renderMainContainer();
     generateMainUI.matchProject();
+
+    // Render Initial Project
+    generateMainUI.renderContent('div', 'project-main-title', 'h1', ManageProject.projects[0].title);
+    generateMainUI.renderAddBtn('button', 'project-main-button', 'add-btn', 'Add Task');
+    generateMainUI.renderContent('div', 'project-main-description', 'p', ManageProject.projects[0].description);
+    generateMainUI.renderTasks(ManageProject.projects[0].taskArray, 'task-box');
+    generateMainUI.initialiseTaskForm();
 }
 
 export function restartProjectList() {
