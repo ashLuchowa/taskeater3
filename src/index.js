@@ -23,18 +23,12 @@ function initialiseApp() {
     generateMainUI.matchProject();
 }
 
-export function rebootApp() {
+export function restartProjectList() {
     // Sidebar
     generateSideUI.clearSideUI();
-    generateSideUI.renderSideContainer();
-    generateSideUI.renderLogo('Logo');
-    generateSideUI.renderAddBtn('button', 'add-project-btn', 'Add Project');
     generateSideUI.renderProjectList();
-    generateSideUI.initialiseForm();
 
     // Main
-    generateMainUI.clearMainUI();
-    generateMainUI.renderMainContainer();
     generateMainUI.matchProject();
 }
 

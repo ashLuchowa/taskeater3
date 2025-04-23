@@ -1,6 +1,6 @@
 import { ManageProject } from "../events/manageProjects";
 import { Project } from "../events/manageProjects";
-import { rebootApp } from "..";
+import { rebootApp, restartProjectList } from "..";
 
 class SideUI {
     constructor(outerSelector, sideSelector) {
@@ -60,7 +60,7 @@ class SideUI {
     }
 
     clearSideUI() {
-        const container = document.querySelector(`.${this.sideSelector}`);
+        const container = document.querySelector('.project-list-container');
         if(container) {
             container.remove();
         }
@@ -128,7 +128,7 @@ class SideUI {
         ManageProject.projects.push(project);
 
         // // Re-render SideUI
-        rebootApp();
+        restartProjectList();
 
         console.log(project);
         console.log(ManageProject.projects);
