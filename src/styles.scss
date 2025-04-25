@@ -89,25 +89,38 @@ table {
 }
 
 /*--------- SIDE ---------*/
-.project-list-container {
-  background-color: rgb(211, 241, 164);
-  li {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    margin-bottom: 10px;
-    .side-setting {
+.side-container {
+  .project-list-container {
+    background-color: rgb(211, 241, 164);
+    li {
+      position: relative;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      .side-dot {
-        margin-bottom: 2px;
-        background-color: rgb(0, 0, 0);
-        height: 3px;
-        width: 15px;
-        border-radius: 20px;
+      flex-direction: row;
+      gap: 10px;
+      margin-bottom: 10px;
+      .side-setting {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .side-dot {
+          margin-bottom: 2px;
+          background-color: rgb(0, 0, 0);
+          height: 3px;
+          width: 15px;
+          border-radius: 20px;
+        }
       }
     }
+  }
+
+  .side-setting-container {
+    background-color: white;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    z-index: 1000;
+    padding: 7px;
+    border-radius: 7px;
   }
 }

@@ -59,7 +59,7 @@ class SideUI {
             // Setting
             const settingContainer = document.createElement('div');
             settingContainer.classList.add('side-setting');
-            for(let i = 0; i < 3; i++) {
+            for (let i = 0; i < 3; i++) {
                 const dotContainer = document.createElement('div');
                 dotContainer.classList.add('side-dot');
                 settingContainer.appendChild(dotContainer);
@@ -69,15 +69,54 @@ class SideUI {
             projectItem.appendChild(settingContainer);
             projectItem.appendChild(projectItemText);
             projectItemMain.appendChild(projectItem);
+
+            settingContainer.addEventListener('click', this.renderSettingForm);
         });
 
         projectListContainer.appendChild(projectItemMain);
         this.sideContainer.appendChild(projectListContainer);
     }
 
+    renderSettingForm = () => {
+        // Outer container
+        const settingForm = document.createElement('div');
+        settingForm.classList.add('side-setting-container');
+
+        // Edit
+        const editSetting = document.createElement('p');
+        editSetting.textContent = 'edit';
+        editSetting.classList.add('edit-setting');
+        settingForm.appendChild(editSetting);
+
+        // Delete
+        const deleteSetting = document.createElement('p');
+        deleteSetting.textContent = 'delete';
+        deleteSetting.classList.add('delete-setting');
+        settingForm.appendChild(deleteSetting);
+        deleteSetting.addEventListener('click', this.deleteProject);
+
+        // Avoid duplications
+        const existingContainer = document.querySelector('.side-setting-container');
+
+        const container = document.querySelectorAll('.project-list-item');
+        container.forEach(item => {
+            item.addEventListener('click', () => {
+                if (existingContainer) {
+                    existingContainer.remove();
+                } else {
+                    item.appendChild(settingForm);
+                }
+            });
+        })
+    }
+
+    deleteProject() {
+        alert('Delete project?');
+    }
+
     clearSideUI() {
         const container = document.querySelector('.project-list-container');
-        if(container) {
+        if (container) {
             container.remove();
         }
     }
@@ -154,7 +193,7 @@ class SideUI {
         // Sidebar
         this.clearSideUI();
         this.renderProjectList();
-    
+
         // Main
         generateMainUI.matchProject();
     }
