@@ -1,6 +1,7 @@
 import { ManageProject } from "../events/manageProjects";
 import { Project } from "../events/manageProjects";
 import { restartProjectList } from "..";
+import { generateMainUI } from "./mainUI";
 
 class SideUI {
     constructor(outerSelector, sideSelector) {
@@ -128,10 +129,19 @@ class SideUI {
         ManageProject.projects.push(project);
 
         // // Re-render SideUI
-        restartProjectList();
+        this.restartProjectList();
 
         console.log(project);
         console.log(ManageProject.projects);
+    }
+
+    restartProjectList() {
+        // Sidebar
+        this.clearSideUI();
+        this.renderProjectList();
+    
+        // Main
+        generateMainUI.matchProject();
     }
 }
 

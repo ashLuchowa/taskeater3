@@ -29,13 +29,4 @@ function initialiseApp() {
     generateMainUI.renderTasks(ManageProject.projects[0].taskArray, 'task-box');
 }
 
-export function restartProjectList() {
-    // Sidebar
-    generateSideUI.clearSideUI();
-    generateSideUI.renderProjectList();
-
-    // Main
-    generateMainUI.matchProject();
-}
-
 initialiseApp();
