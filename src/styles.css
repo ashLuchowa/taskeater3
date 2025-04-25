@@ -81,7 +81,7 @@ table {
 }
 
 /*--------- PROJECT FORM ---------*/
-.project-form-container {
+.project-form-container, .task-form-container {
   position: absolute;
   top: 50%;
   left: 50%;

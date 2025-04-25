@@ -1,6 +1,6 @@
 import { ManageProject } from "../events/manageProjects";
 import { Project } from "../events/manageProjects";
-import { rebootApp, restartProjectList } from "..";
+import { restartProjectList } from "..";
 
 class SideUI {
     constructor(outerSelector, sideSelector) {
