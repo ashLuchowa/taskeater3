@@ -51,8 +51,23 @@ class SideUI {
         ManageProject.projects.forEach(itemProject => {
             const projectItem = document.createElement('li');
             projectItem.classList.add('project-list-item');
-            projectItem.textContent = itemProject.title;
 
+            // Titles
+            const projectItemText = document.createElement('p');
+            projectItemText.textContent = itemProject.title;
+
+            // Setting
+            const settingContainer = document.createElement('div');
+            settingContainer.classList.add('side-setting');
+            for(let i = 0; i < 3; i++) {
+                const dotContainer = document.createElement('div');
+                dotContainer.classList.add('side-dot');
+                settingContainer.appendChild(dotContainer);
+            }
+
+            // Append setting and titles
+            projectItem.appendChild(settingContainer);
+            projectItem.appendChild(projectItemText);
             projectItemMain.appendChild(projectItem);
         });
 
