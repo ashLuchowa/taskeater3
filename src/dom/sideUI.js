@@ -51,6 +51,7 @@ class SideUI {
         ManageProject.projects.forEach(itemProject => {
             const projectItem = document.createElement('li');
             projectItem.classList.add('project-list-item');
+            projectItem.setAttribute('data-title', itemProject.title);
 
             // Titles
             const projectItemText = document.createElement('p');
@@ -77,41 +78,65 @@ class SideUI {
         this.sideContainer.appendChild(projectListContainer);
     }
 
-    renderSettingForm = () => {
+    renderSettingForm = (e) => {
         // Outer container
         const settingForm = document.createElement('div');
         settingForm.classList.add('side-setting-container');
 
-        // Edit
-        const editSetting = document.createElement('p');
-        editSetting.textContent = 'edit';
-        editSetting.classList.add('edit-setting');
-        settingForm.appendChild(editSetting);
+        const generateSettingItem = (className, settingText) => {
+            const settingItem = document.createElement('p');
+            settingItem.classList.add(className);
+            settingItem.textContent = settingText;
+            settingForm.appendChild(settingItem);
 
-        // Delete
-        const deleteSetting = document.createElement('p');
-        deleteSetting.textContent = 'delete';
-        deleteSetting.classList.add('delete-setting');
-        settingForm.appendChild(deleteSetting);
-        deleteSetting.addEventListener('click', this.deleteProject);
+            // Delete event
+            if (settingText === 'delete') {
+                settingItem.addEventListener('click', (e) => {
+                    this.deleteProject(e);
+                });
+            }
+        }
+
+        generateSettingItem('edit-setting', 'edit');
+        generateSettingItem('delete-setting', 'delete');
 
         // Avoid duplications
         const existingContainer = document.querySelector('.side-setting-container');
+        const clickTarget = e.currentTarget.closest('.project-list-item');
 
-        const container = document.querySelectorAll('.project-list-item');
-        container.forEach(item => {
-            item.addEventListener('click', () => {
-                if (existingContainer) {
-                    existingContainer.remove();
-                } else {
-                    item.appendChild(settingForm);
-                }
-            });
-        })
+        if (existingContainer) {
+            existingContainer.remove();
+        } else {
+            clickTarget.appendChild(settingForm);
+        }
     }
 
-    deleteProject() {
-        alert('Delete project?');
+    deleteProject(e) {
+        // Target setting parent container title attribute
+        const result = e.currentTarget.closest('.project-list-item').getAttribute('data-title');
+
+        // Match project array title to target title attribute
+        const foundItem = ManageProject.projects.find(item => {
+            return item.title === result;
+        });
+
+        if (foundItem) {
+            // Get the position of the object
+            const index = ManageProject.projects.indexOf(foundItem);
+
+            // If object exists, remove the targeted object from array
+            if (index !== -1) {
+                ManageProject.projects.splice(index, 1);
+                // reboot project list
+                this.restartProjectList();
+
+                // reboot main UI to first project
+                generateMainUI.renderContent('div', 'project-main-title', 'h1', ManageProject.projects[0].title);
+                generateMainUI.renderAddBtn('button', 'project-main-button', 'add-btn', 'Add Task');
+                generateMainUI.renderContent('div', 'project-main-description', 'p', ManageProject.projects[0].description);
+                generateMainUI.renderTasks(ManageProject.projects[0].taskArray, 'task-box');
+            }
+        }
     }
 
     clearSideUI() {

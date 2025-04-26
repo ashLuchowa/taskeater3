@@ -96,6 +96,7 @@ table {
 /*--------- SIDE ---------*/
 .side-container .project-list-container {
   background-color: rgb(211, 241, 164);
+  padding: 0 10px;
 }
 .side-container .project-list-container li {
   position: relative;
@@ -111,11 +112,14 @@ table {
   align-items: center;
 }
 .side-container .project-list-container li .side-setting .side-dot {
-  margin-bottom: 2px;
+  margin-bottom: 3px;
   background-color: rgb(0, 0, 0);
-  height: 3px;
-  width: 15px;
+  height: 2px;
+  width: 12px;
   border-radius: 20px;
+}
+.side-container .project-list-container li .side-setting .side-dot:last-child {
+  margin-bottom: 0;
 }
 .side-container .side-setting-container {
   background-color: white;
