@@ -88,6 +88,19 @@ class MainUI {
             const outerTaskContainer = document.createElement('div');
             outerTaskContainer.classList.add('outer-task-container');
 
+            // Setting Btn
+            const settingContainer = document.createElement('div');
+            settingContainer.classList.add('main-setting');
+            for (let i = 0; i < 3; i++) {
+                const dotContainer = document.createElement('div');
+                dotContainer.classList.add('side-dot');
+                settingContainer.appendChild(dotContainer);
+            }
+            outerTaskContainer.appendChild(settingContainer);
+
+            // // Setting Menu
+            settingContainer.addEventListener('click', this.renderSettingForm);
+
             function generateTaskInfo(containerName, type, content, textType) {
                 const innerContainer = document.createElement('div');
                 innerContainer.classList.add(containerName);
@@ -231,6 +244,39 @@ class MainUI {
         console.log(ManageTask.tasks);
     }
 
+    renderSettingForm = (e) => {
+        // Avoid duplications
+        const clickTarget = e.currentTarget.closest('.outer-task-container');
+        const existingContainer = clickTarget.querySelector('.main-setting-container');
+
+        if (existingContainer) {
+            existingContainer.remove();
+        } else {
+            const settingForm = document.createElement('div');
+            settingForm.classList.add('main-setting-container');
+
+            const generateSettingItem = (className, settingText) => {
+                const settingItem = document.createElement('p');
+                settingItem.classList.add(className);
+                settingItem.textContent = settingText;
+                settingForm.appendChild(settingItem);
+
+
+                // // Delete event
+                // if (settingText === 'delete') {
+                //     settingItem.addEventListener('click', (e) => {
+                //         this.deleteProject(e);
+                //     });
+                // } 
+            }
+
+            generateSettingItem('edit-setting', 'edit');
+            generateSettingItem('delete-setting', 'delete');
+
+            clickTarget.appendChild(settingForm);
+        }
+    }
+
     rebootMainContent(projectParent) {
         const contents = document.querySelectorAll('.main-container div');
         // Clear content first
@@ -241,8 +287,8 @@ class MainUI {
         const foundItem = ManageProject.projects.find((itemProject) => {
             return itemProject.title === projectParent.value;
         });
-    
-        if(foundItem) {
+
+        if (foundItem) {
             generateMainUI.renderContent('div', 'project-main-title', 'h1', foundItem.title);
             generateMainUI.renderAddBtn('button', 'project-main-button', 'add-btn', 'Add Task');
             generateMainUI.renderContent('div', 'project-main-description', 'p', foundItem.description);

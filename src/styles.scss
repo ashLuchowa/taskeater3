@@ -128,3 +128,39 @@ table {
     border-radius: 7px;
   }
 }
+
+/*--------- MAIN ---------*/
+.main-container {
+  .task-box {
+    .outer-task-container {
+      position: relative;
+      .main-setting {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 5px 5px 5px 5px;
+        cursor: pointer;
+        // background-color: rgb(255, 255, 255);
+        .side-dot {
+          margin-bottom: 3px;
+          background-color: rgb(0, 0, 0);
+          height: 4px;
+          width: 4px;
+          border-radius: 30px;
+          &:last-child {
+            margin-bottom: 0; 
+          }
+        }
+      }
+      .main-setting-container {
+        background-color: white;
+        position: absolute;
+        top: 0;
+        right: -55px;
+        z-index: 1000;
+        padding: 7px;
+        border-radius: 7px;
+      }
+    }
+  }
+}
