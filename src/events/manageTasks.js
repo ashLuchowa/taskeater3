@@ -22,6 +22,12 @@ export class ManageTask {
         new Task('Sharpen Knife', 'Learn butchering', '02 May 2025', 'Medium', 'In Progress', 'Hunting'),
     ];
 
+    static pushDefaultTask() {
+        this.defaultTasks.forEach(item => {
+            this.tasks.push(item);
+        });
+    }
+
     // Match tasks (default or new) into appropriate projects
     static matchContent(taskType) {
         taskType.forEach(itemTask => {

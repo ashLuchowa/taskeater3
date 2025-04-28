@@ -87,6 +87,7 @@ class MainUI {
         target.forEach(item => {
             const outerTaskContainer = document.createElement('div');
             outerTaskContainer.classList.add('outer-task-container');
+            outerTaskContainer.setAttribute('data-attribute', item.title);
 
             // Setting Btn
             const settingContainer = document.createElement('div');
@@ -261,19 +262,50 @@ class MainUI {
                 settingItem.textContent = settingText;
                 settingForm.appendChild(settingItem);
 
-
-                // // Delete event
-                // if (settingText === 'delete') {
-                //     settingItem.addEventListener('click', (e) => {
-                //         this.deleteProject(e);
-                //     });
-                // } 
+                // Delete event
+                if (settingText === 'delete') {
+                    settingItem.addEventListener('click', (e) => {
+                        this.deleteTask(e);
+                    });
+                }
             }
 
             generateSettingItem('edit-setting', 'edit');
             generateSettingItem('delete-setting', 'delete');
 
             clickTarget.appendChild(settingForm);
+        }
+    }
+
+    deleteTask(e) {
+        // Match clicked setting and return data-attribute value
+        const target = e.currentTarget.closest('.outer-task-container').getAttribute('data-attribute');
+
+        const foundItem = ManageTask.tasks.find(itemTask => {
+            return itemTask.title === target;
+        });
+
+        if (foundItem) {
+            // Assign index
+            const index = ManageTask.tasks.indexOf(foundItem);
+
+            // If Object exists
+            if (index !== -1) {
+                // Remove
+                ManageTask.tasks.splice(index, 1);
+
+                // Target matched tasks with parent projects
+                const foundProject = ManageProject.projects.find((itemProject) => {
+                    return itemProject.title === foundItem.projectParent;
+                });
+
+                if(foundProject) {
+                    // Clear Task Array and match back tasks
+                    foundProject.taskArray = [];
+                    ManageTask.matchContent(ManageTask.tasks);
+                    generateMainUI.renderTasks(foundProject.taskArray, 'task-box');
+                }
+            }
         }
     }
 

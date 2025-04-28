@@ -8,6 +8,7 @@ import { generateMainUI } from "./dom/mainUI";
 function initialiseApp() {
     // Push default projects and tasks into related arrays
     ManageProject.pushDefaultProjects();
+    ManageTask.pushDefaultTask();
     ManageProject.pushNewProjects();
     ManageTask.matchContent(ManageTask.defaultTasks);
 
