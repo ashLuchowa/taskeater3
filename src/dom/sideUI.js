@@ -101,7 +101,7 @@ class SideUI {
             // Edit event
             if (settingText === 'edit') {
                 settingItem.addEventListener('click', () => {
-                    this.initialiseForm('Edit Project', settingText);
+                    this.initialiseForm('Edit Project', settingText, e);
                 });
             }
         }
@@ -155,7 +155,7 @@ class SideUI {
         }
     }
 
-    initialiseForm(formTitle, settingText) {
+    initialiseForm(formTitle, settingText, e) {
         const formContainer = document.createElement('form');
         formContainer.classList.add('project-form-container');
 
@@ -186,10 +186,12 @@ class SideUI {
 
         // Prevent duplication
         const existingContainer = document.querySelector('.project-form-container');
+        const clickTarget = e.target.closest('.project-list-item');
+
         if (existingContainer) {
             existingContainer.remove();
         } else {
-            this.outerContainer.appendChild(formContainer);
+            clickTarget.appendChild(formContainer);
         }
 
         generateFormDetails('title', 'form-title', 'label', 'Title: ', 'input', 'text');
@@ -226,7 +228,19 @@ class SideUI {
 
     editProject(e) {
         e.preventDefault();
-        alert('editing project');
+        
+        // Target setting parent container title attribute
+        // const result = e.currentTarget.closest('.project-list-item').getAttribute('data-title');
+
+        // // Match project array title to target title attribute
+        // const foundItem = ManageProject.projects.find(item => {
+        //     return item.title === result;
+        // });
+
+        // if(foundItem) {
+        //     console.log(foundItem);
+        // }
+        console.log('click');
     }
 
     restartProjectList() {
