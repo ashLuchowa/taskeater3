@@ -15,9 +15,9 @@ function initialiseApp() {
     // Init Sidebar
     generateSideUI.renderSideContainer();
     generateSideUI.renderLogo('Logo');
-    generateSideUI.renderAddBtn('button', 'add-project-btn', 'Add Project');
+    const addProjectButton = generateSideUI.renderAddBtn('button', 'add-project-btn', 'Add Project');
     generateSideUI.renderProjectList();
-    generateSideUI.initialiseForm();
+    addProjectButton.addEventListener('click', () => generateSideUI.initialiseForm());
 
     // Init Main Content
     generateMainUI.renderMainContainer();

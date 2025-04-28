@@ -35,6 +35,8 @@ class SideUI {
         addBtnContainer.textContent = nameContent;
 
         this.sideContainer.appendChild(addBtnContainer);
+
+        return addBtnContainer;
     }
 
     renderProjectList() {
@@ -95,6 +97,13 @@ class SideUI {
                     this.deleteProject(e);
                 });
             }
+
+            // Edit event
+            if (settingText === 'edit') {
+                settingItem.addEventListener('click', (e) => {
+                    alert('edit?');
+                });
+            }
         }
 
         generateSettingItem('edit-setting', 'edit');
@@ -147,51 +156,48 @@ class SideUI {
     }
 
     initialiseForm() {
-        const button = document.querySelector('.add-project-btn');
-        button.addEventListener('click', () => {
-            const formContainer = document.createElement('form');
-            formContainer.classList.add('project-form-container');
+        const formContainer = document.createElement('form');
+        formContainer.classList.add('project-form-container');
 
-            // Form header
-            const formHeader = document.createElement('legend');
-            formHeader.textContent = 'Add Project';
-            formContainer.appendChild(formHeader);
+        // Form header
+        const formHeader = document.createElement('legend');
+        formHeader.textContent = 'Add Project';
+        formContainer.appendChild(formHeader);
 
-            function generateFormDetails(name, className, elementLabel, labelText, elementInput, inputType) {
-                const outerFormItem = document.createElement('div');
-                outerFormItem.classList.add(className);
+        function generateFormDetails(name, className, elementLabel, labelText, elementInput, inputType) {
+            const outerFormItem = document.createElement('div');
+            outerFormItem.classList.add(className);
 
-                // Label
-                const containerLabel = document.createElement(elementLabel);
-                containerLabel.textContent = labelText;
-                containerLabel.setAttribute('for', name);
-                // Input
-                const containerInput = document.createElement(elementInput);
-                containerInput.setAttribute('type', inputType);
-                containerInput.setAttribute('id', name);
-                containerInput.setAttribute('name', name);
-                containerInput.setAttribute('required', '');
+            // Label
+            const containerLabel = document.createElement(elementLabel);
+            containerLabel.textContent = labelText;
+            containerLabel.setAttribute('for', name);
+            // Input
+            const containerInput = document.createElement(elementInput);
+            containerInput.setAttribute('type', inputType);
+            containerInput.setAttribute('id', name);
+            containerInput.setAttribute('name', name);
+            containerInput.setAttribute('required', '');
 
-                outerFormItem.appendChild(containerLabel);
-                outerFormItem.appendChild(containerInput);
-                formContainer.appendChild(outerFormItem);
-            }
+            outerFormItem.appendChild(containerLabel);
+            outerFormItem.appendChild(containerInput);
+            formContainer.appendChild(outerFormItem);
+        }
 
-            // Prevent duplication
-            const existingContainer = document.querySelector('.project-form-container');
-            if (existingContainer) {
-                existingContainer.remove();
-            } else {
-                this.outerContainer.appendChild(formContainer);
-            }
+        // Prevent duplication
+        const existingContainer = document.querySelector('.project-form-container');
+        if (existingContainer) {
+            existingContainer.remove();
+        } else {
+            this.outerContainer.appendChild(formContainer);
+        }
 
-            generateFormDetails('title', 'form-title', 'label', 'Title: ', 'input', 'text');
-            generateFormDetails('description', 'form-description', 'label', 'Description: ', 'input', 'text');
-            generateFormDetails('submit', 'form-submit', 'label', '', 'input', 'submit');
+        generateFormDetails('title', 'form-title', 'label', 'Title: ', 'input', 'text');
+        generateFormDetails('description', 'form-description', 'label', 'Description: ', 'input', 'text');
+        generateFormDetails('submit', 'form-submit', 'label', '', 'input', 'submit');
 
-            // Form Submit
-            formContainer.addEventListener('submit', (this.submitForm));
-        });
+        // Form Submit
+        formContainer.addEventListener('submit', (this.submitForm));
     }
 
     submitForm = (e) => {
