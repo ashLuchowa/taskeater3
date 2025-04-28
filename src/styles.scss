@@ -56,6 +56,17 @@ table {
   grid-template-columns: 2fr 10fr;
   height: 100vh;
   width: 100vw;
+  .project-form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+  }
 }
 
 /*--------- SIDEBAR ---------*/
@@ -76,17 +87,7 @@ table {
 }
 
 /*--------- PROJECT FORM ---------*/
-.project-form-container, .task-form-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background-color: rgb(255, 255, 255);
-  padding: 20px;
-}
+
 
 /*--------- SIDE ---------*/
 .side-container {
@@ -151,6 +152,17 @@ table {
   .task-box {
     .outer-task-container {
       position: relative;
+      .task-form-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background-color: rgb(255, 255, 255);
+        padding: 20px;
+      }
       .main-setting {
         position: absolute;
         top: 0;
