@@ -300,6 +300,17 @@ class SideUI {
 
             // Re-render SideUI
             generateSideUI.restartProjectList();
+
+            // Reboot Main UI
+            const contents = document.querySelectorAll('.main-container div');
+            // Clear content first
+            contents.forEach((item => {
+                item.remove();
+            }));
+            generateMainUI.renderContent('div', 'project-main-title', 'h1', foundItem.title);
+            generateMainUI.renderAddBtn('button', 'project-main-button', 'add-btn', 'Add Task');
+            generateMainUI.renderContent('div', 'project-main-description', 'p', foundItem.description);
+            generateMainUI.renderTasks(foundItem.taskArray, 'task-box');
         }
     }
 
