@@ -100,8 +100,8 @@ class SideUI {
 
             // Edit event
             if (settingText === 'edit') {
-                settingItem.addEventListener('click', (e) => {
-                    alert('edit?');
+                settingItem.addEventListener('click', () => {
+                    this.initialiseForm('Edit Project', settingText);
                 });
             }
         }
@@ -155,13 +155,13 @@ class SideUI {
         }
     }
 
-    initialiseForm() {
+    initialiseForm(formTitle, settingText) {
         const formContainer = document.createElement('form');
         formContainer.classList.add('project-form-container');
 
         // Form header
         const formHeader = document.createElement('legend');
-        formHeader.textContent = 'Add Project';
+        formHeader.textContent = formTitle;
         formContainer.appendChild(formHeader);
 
         function generateFormDetails(name, className, elementLabel, labelText, elementInput, inputType) {
@@ -197,7 +197,11 @@ class SideUI {
         generateFormDetails('submit', 'form-submit', 'label', '', 'input', 'submit');
 
         // Form Submit
-        formContainer.addEventListener('submit', (this.submitForm));
+        if(settingText === 'edit') {
+            formContainer.addEventListener('submit', (this.editProject));
+        } else {
+            formContainer.addEventListener('submit', (this.submitForm));
+        }
     }
 
     submitForm = (e) => {
@@ -218,6 +222,11 @@ class SideUI {
 
         console.log(project);
         console.log(ManageProject.projects);
+    }
+
+    editProject(e) {
+        e.preventDefault();
+        alert('editing project');
     }
 
     restartProjectList() {
