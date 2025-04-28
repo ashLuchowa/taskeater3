@@ -97,8 +97,30 @@ table {
 .side-container .project-list-container {
   background-color: rgb(211, 241, 164);
 }
-.side-container .project-list-container li {
+.side-container .project-list-container ul .project-list-item {
   position: relative;
+}
+.side-container .project-list-container ul .project-list-item .edit-form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+}
+.side-container .project-list-container ul .project-list-item .side-setting-container {
+  background-color: white;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  z-index: 1000;
+  padding: 7px;
+  border-radius: 7px;
+}
+.side-container .project-list-container li {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -121,15 +143,6 @@ table {
 }
 .side-container .project-list-container li .side-setting .side-dot:last-child {
   margin-bottom: 0;
-}
-.side-container .side-setting-container {
-  background-color: white;
-  position: absolute;
-  top: 20px;
-  left: 0;
-  z-index: 1000;
-  padding: 7px;
-  border-radius: 7px;
 }
 
 /*--------- MAIN ---------*/

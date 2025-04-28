@@ -93,8 +93,32 @@ table {
   .project-list-container {
     background-color: rgb(211, 241, 164);
     // padding: 0 10px;
+    ul {
+      .project-list-item {
+        position: relative;
+        .edit-form-container {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          background-color: rgb(255, 255, 255);
+          padding: 20px;
+        }
+        .side-setting-container {
+          background-color: white;
+          position: absolute;
+          top: 20px;
+          left: 10px;
+          z-index: 1000;
+          padding: 7px;
+          border-radius: 7px;
+        }
+      }
+    }
     li {
-      position: relative;
       display: flex;
       flex-direction: row;
       gap: 10px;
@@ -119,16 +143,6 @@ table {
         padding: 0 0 0 10px;
       }
     }
-  }
-
-  .side-setting-container {
-    background-color: white;
-    position: absolute;
-    top: 20px;
-    left: 0;
-    z-index: 1000;
-    padding: 7px;
-    border-radius: 7px;
   }
 }
 
