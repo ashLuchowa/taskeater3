@@ -96,7 +96,6 @@ table {
 /*--------- SIDE ---------*/
 .side-container .project-list-container {
   background-color: rgb(211, 241, 164);
-  padding: 0 10px;
 }
 .side-container .project-list-container li {
   position: relative;
@@ -110,6 +109,8 @@ table {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  padding: 0 0 0 10px;
 }
 .side-container .project-list-container li .side-setting .side-dot {
   margin-bottom: 3px;

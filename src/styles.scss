@@ -92,7 +92,7 @@ table {
 .side-container {
   .project-list-container {
     background-color: rgb(211, 241, 164);
-    padding: 0 10px;
+    // padding: 0 10px;
     li {
       position: relative;
       display: flex;
@@ -104,6 +104,8 @@ table {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
+        // background-color: aliceblue;
         .side-dot {
           margin-bottom: 3px;
           background-color: rgb(0, 0, 0);
@@ -114,6 +116,7 @@ table {
             margin-bottom: 0; 
           }
         }
+        padding: 0 0 0 10px;
       }
     }
   }
@@ -148,7 +151,7 @@ table {
           width: 4px;
           border-radius: 30px;
           &:last-child {
-            margin-bottom: 0; 
+            margin-bottom: 0;
           }
         }
       }
