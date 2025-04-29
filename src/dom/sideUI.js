@@ -155,59 +155,6 @@ class SideUI {
         }
     }
 
-    addProjectForm(formTitle, settingText, e) {
-        const formContainer = document.createElement('form');
-        formContainer.classList.add('project-form-container');
-
-        // Form header
-        const formHeader = document.createElement('legend');
-        formHeader.textContent = formTitle;
-        formContainer.appendChild(formHeader);
-
-        function generateFormDetails(name, className, elementLabel, labelText, elementInput, inputType) {
-            const outerFormItem = document.createElement('div');
-            outerFormItem.classList.add(className);
-
-            // Label
-            const containerLabel = document.createElement(elementLabel);
-            containerLabel.textContent = labelText;
-            containerLabel.setAttribute('for', name);
-            // Input
-            const containerInput = document.createElement(elementInput);
-            containerInput.setAttribute('type', inputType);
-            containerInput.setAttribute('id', name);
-            containerInput.setAttribute('name', name);
-            containerInput.setAttribute('required', '');
-
-            outerFormItem.appendChild(containerLabel);
-            outerFormItem.appendChild(containerInput);
-            formContainer.appendChild(outerFormItem);
-        }
-
-        // Prevent duplication
-        const existingContainer = document.querySelector('.project-form-container');
-        // const clickTarget = e.target.closest('.project-list-item');
-
-        if (existingContainer) {
-            existingContainer.remove();
-        } else {
-            if (formContainer.className === 'project-form-container') {
-                this.outerContainer.appendChild(formContainer);
-            }
-        }
-
-        generateFormDetails('title', 'form-title', 'label', 'Title: ', 'input', 'text');
-        generateFormDetails('description', 'form-description', 'label', 'Description: ', 'input', 'text');
-        generateFormDetails('submit', 'form-submit', 'label', '', 'input', 'submit');
-
-        // Form Submit
-        if (settingText === 'edit') {
-            formContainer.addEventListener('submit', (this.editProject));
-        } else {
-            formContainer.addEventListener('submit', (this.submitForm));
-        }
-    }
-
     editProjectForm(formTitle, settingText, e) {
         const formContainer = document.createElement('form');
         formContainer.classList.add('edit-form-container');
@@ -259,23 +206,6 @@ class SideUI {
         }
     }
 
-    submitForm = (e) => {
-        e.preventDefault();
-        const formContainer = document.querySelector('.project-form-container');
-        const getTitle = document.querySelector('#title');
-        const getDescription = document.querySelector('#description');
-        const project = new Project(getTitle.value, getDescription.value);
-
-        // Clear form after submit
-        formContainer.remove();
-
-        // Push project into array
-        ManageProject.projects.push(project);
-
-        // Re-render SideUI
-        this.restartProjectList();
-    }
-
     editProject(e) {
         e.preventDefault();
 
@@ -287,7 +217,7 @@ class SideUI {
             return item.title === result;
         });
 
-        if(foundItem) {
+        if (foundItem) {
             const formContainer = document.querySelector('.edit-form-container');
             const getProjectTitle = document.querySelector('#title');
             const getProjectDescription = document.querySelector('#description');
@@ -324,4 +254,100 @@ class SideUI {
     }
 }
 
+class Form {
+    constructor(mainType, formName, formTitle, mainTarget) {
+        this.mainType = mainType;
+        this.formName = formName;
+        this.formTitle = formTitle;
+        this.mainTarget = mainTarget;
+
+        this.formContainer = this.createFormContainer();
+
+        this.generateFormLegend();
+        this.generateFormDetails();
+        // this.submitForm();
+    }
+
+    createFormContainer() {
+        const formContainer = document.createElement(this.mainType);
+        formContainer.classList.add(this.formName);
+        return formContainer;
+    }
+
+    generateFormLegend() {
+        const formHeader = document.createElement('legend');
+        formHeader.textContent = this.formTitle;
+        this.formContainer.appendChild(formHeader);
+    }
+
+    formDetails(name, className, elementLabel, labelText, elementInput, inputType) {
+        const outerFormItem = document.createElement('div');
+        outerFormItem.classList.add(className);
+
+        // Label
+        const containerLabel = document.createElement(elementLabel);
+        containerLabel.textContent = labelText;
+        containerLabel.setAttribute('for', name);
+        // Input
+        const containerInput = document.createElement(elementInput);
+        containerInput.setAttribute('type', inputType);
+        containerInput.setAttribute('id', name);
+        containerInput.setAttribute('name', name);
+        containerInput.required = true;
+
+        outerFormItem.appendChild(containerLabel);
+        outerFormItem.appendChild(containerInput);
+        return outerFormItem;
+    }
+
+    generateFormDetails() {
+        const title = this.formDetails('title', 'form-title', 'label', 'Title: ', 'input', 'text');
+        const description = this.formDetails('description', 'form-description', 'label', 'Description: ', 'input', 'text');
+        const submit = this.formDetails('submit', 'form-submit', 'label', '', 'input', 'submit');
+
+        this.formContainer.appendChild(title);
+        this.formContainer.appendChild(description);
+        this.formContainer.appendChild(submit);
+    }
+
+    appendBody() {
+        const contentContainer = document.querySelector(this.mainTarget);
+        const existingContainer = document.querySelector(`.${this.formName}`);
+
+        if (existingContainer) {
+            existingContainer.remove();
+        } else {
+            contentContainer.appendChild(this.formContainer);
+        }
+    }
+}
+
+class SubmitEvent {
+    constructor(mainForm) {
+        this.mainForm = mainForm;
+    }
+
+    submit() {
+        this.mainForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formContainer = document.querySelector(`.${addForm.formName}`);
+            const getTitle = document.querySelector('#title');
+            const getDescription = document.querySelector('#description');
+            const project = new Project(getTitle.value, getDescription.value);
+
+            // Clear form after submit
+            formContainer.remove();
+
+            // Push project into array
+            ManageProject.projects.push(project);
+
+            // Re-render SideUI
+            generateSideUI.restartProjectList();
+        });
+    }
+}
+
 export const generateSideUI = new SideUI('.content', 'side-container');
+export const addForm = new Form('form', 'add-form-container', 'Add Project', '.content');
+export const submitAddProject = new SubmitEvent(addForm.formContainer);
