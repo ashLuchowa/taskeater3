@@ -3,7 +3,7 @@ import { ManageProject } from "./events/manageProjects";
 import { ManageTask } from "./events/manageTasks";
 import { generateSideUI } from "./dom/sideUI";
 import { generateMainUI } from "./dom/mainUI";
-import { addForm } from "./dom/sideUI";
+import { addProjectForm } from "./dom/sideUI";
 import { submitAddProject } from "./dom/sideUI";
 
 
@@ -19,7 +19,7 @@ function initialiseApp() {
     generateSideUI.renderLogo('Logo');
     const addProjectButton = generateSideUI.renderAddBtn('button', 'add-project-btn', 'Add Project');
     generateSideUI.renderProjectList();
-    addProjectButton.addEventListener('click', (e) => addForm.appendBody(e));
+    addProjectButton.addEventListener('click', (e) => addProjectForm.appendBody(e));
     submitAddProject.submit();
 
     // Init Main Content
