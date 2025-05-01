@@ -41,7 +41,7 @@ class MainUI {
         this.mainContainer.appendChild(addBtnContainer);
 
         // Form
-        addBtn.addEventListener('click', this.renderForm);
+        addBtn.addEventListener('click', (e) => addTaskForm.appendBody(e));
     }
 
     matchProject() {
@@ -127,123 +127,6 @@ class MainUI {
         }
 
         this.mainContainer.appendChild(container);
-    }
-
-    renderForm = () => {
-        const taskFormContainer = document.createElement('form');
-        taskFormContainer.classList.add('project-form-container');
-
-        // Form header
-        const taskFormHeader = document.createElement('legend');
-        taskFormHeader.textContent = 'Add Task';
-        taskFormContainer.appendChild(taskFormHeader);
-
-        function generateSelect(option, label) {
-            const mainContainer = document.createElement('div');
-            const containerLabel = document.createElement('label');
-            containerLabel.setAttribute('for', option);
-            containerLabel.textContent = label;
-            const selectContainer = document.createElement('select');
-            selectContainer.setAttribute('id', option);
-            selectContainer.setAttribute('name', option);
-
-            if (option === 'priority') {
-                const options = ['Medium', 'High', 'Low'];
-                options.forEach(item => {
-                    const option = document.createElement('option');
-                    option.textContent = item;
-                    selectContainer.appendChild(option);
-                });
-            } else if (option === 'status') {
-                const options = ['To Do', 'In Progress', 'Done'];
-                options.forEach(item => {
-                    const option = document.createElement('option');
-                    option.textContent = item;
-                    selectContainer.appendChild(option);
-                });
-            } else if (option === 'projectParent') {
-                const options = ManageProject.projects;
-                options.forEach(item => {
-                    const option = document.createElement('option');
-                    option.textContent = item.title;
-                    selectContainer.appendChild(option);
-                });
-            }
-
-            mainContainer.appendChild(containerLabel);
-            mainContainer.appendChild(selectContainer);
-            taskFormContainer.appendChild(mainContainer);
-        }
-
-        function generateFormDetails(name, className, elementLabel, labelText, elementInput, inputType) {
-            const outerFormItem = document.createElement('div');
-            outerFormItem.classList.add(className);
-
-            // Label
-            const containerLabel = document.createElement(elementLabel);
-            containerLabel.textContent = labelText;
-            containerLabel.setAttribute('for', name);
-            // General Input
-            const containerInput = document.createElement(elementInput);
-            containerInput.setAttribute('type', inputType);
-            containerInput.setAttribute('id', name);
-            containerInput.setAttribute('name', name);
-            containerInput.setAttribute('required', '');
-
-            outerFormItem.appendChild(containerLabel);
-            outerFormItem.appendChild(containerInput);
-            taskFormContainer.appendChild(outerFormItem);
-        }
-
-        // Prevent duplication
-        const existingContainer = document.querySelector('.project-form-container');
-
-        if (existingContainer) {
-            existingContainer.remove();
-        } else {
-            this.outerContainer.appendChild(taskFormContainer);
-        }
-
-        // General Label/Input
-        generateFormDetails('title', 'form-title', 'label', 'Title: ', 'input', 'text');
-        generateFormDetails('description', 'form-description', 'label', 'Description: ', 'input', 'text');
-        generateFormDetails('date', 'form-date', 'label', 'Due Date: ', 'input', 'date');
-
-        // Priority Label/Input
-        generateSelect('priority', 'Priority: ');
-        generateSelect('status', 'Status: ');
-        generateSelect('projectParent', 'Project: ');
-
-        generateFormDetails('submit', 'form-submit', 'label', '', 'input', 'submit');
-
-        // Form Submit
-        taskFormContainer.addEventListener('submit', this.addSubmitForm);
-    }
-
-    addSubmitForm = (e, getProjectParent) => {
-        e.preventDefault();
-
-        const formContainer = document.querySelector('.project-form-container');
-        const getTitle = document.querySelector('#title');
-        const getDescription = document.querySelector('#description');
-        const getDate = document.querySelector('#date');
-        const getPriority = document.querySelector('#priority');
-        const getStatus = document.querySelector('#status');
-        getProjectParent = document.querySelector('#projectParent');
-        const task = new Task(getTitle.value, getDescription.value, getDate.value, getPriority.value, getStatus.value, getProjectParent.value);
-
-        // Clear form after submit
-        formContainer.remove();
-
-        // Push project into array
-        ManageTask.tasks.push(task);
-        ManageTask.matchContent(ManageTask.tasks);
-
-        // Re-render MainUI
-        this.rebootMainContent(getProjectParent);
-
-        console.log(task);
-        console.log(ManageTask.tasks);
     }
 
     renderSettingForm = (e) => {
@@ -394,8 +277,8 @@ class MainUI {
 
         // Target object to edit
         const foundItem = ManageTask.tasks.find(item => item.title === this.editValue);
-        
-        if(foundItem) {
+
+        if (foundItem) {
             foundItem.title = getTitle.value;
             foundItem.description = getDescription.value;
             foundItem.date = getDate.value;
@@ -415,7 +298,7 @@ class MainUI {
             return itemProject.title === foundItem.projectParent;
         });
 
-        if(foundItem2) {
+        if (foundItem2) {
             generateMainUI.renderContent('div', 'project-main-title', 'h1', foundItem2.title);
             generateMainUI.renderAddBtn('button', 'project-main-button', 'add-btn', 'Add Task');
             generateMainUI.renderContent('div', 'project-main-description', 'p', foundItem2.description);
@@ -447,7 +330,7 @@ class MainUI {
                     return itemProject.title === foundItem.projectParent;
                 });
 
-                if(foundProject) {
+                if (foundProject) {
                     // Clear Task Array and match back tasks
                     foundProject.taskArray = [];
                     ManageTask.matchContent(ManageTask.tasks);
@@ -478,10 +361,11 @@ class MainUI {
 }
 
 class TaskForm {
-    constructor(formName, legendName, mainContainerName) {
+    constructor(formName, legendName, mainContainerName, mainTarget) {
         this.formName = formName;
         this.legendName = legendName;
         this.mainContainerName = mainContainerName;
+        this.mainTarget = mainTarget;
 
         this.taskFormContainer = this.mainForm();
         this.headerContainer();
@@ -520,27 +404,116 @@ class TaskForm {
         return outerFormItem;
     }
 
+    optionDetails(option, label) {
+        // Make sure projects are pushed 
+        ManageProject.pushNewProjects();
+
+        const mainContainer = document.createElement('div');
+        const containerLabel = document.createElement('label');
+
+        containerLabel.setAttribute('for', option);
+        containerLabel.textContent = label;
+        const selectContainer = document.createElement('select');
+        selectContainer.setAttribute('id', option);
+        selectContainer.setAttribute('name', option);
+
+        if (option === 'priority') {
+            const options = ['Medium', 'High', 'Low'];
+            options.forEach(item => {
+                const option = document.createElement('option');
+                option.textContent = item;
+                selectContainer.appendChild(option);
+            });
+        } else if (option === 'status') {
+            const options = ['To Do', 'In Progress', 'Done'];
+            options.forEach(item => {
+                const option = document.createElement('option');
+                option.textContent = item;
+                selectContainer.appendChild(option);
+            });
+        } else if (option === 'projectParent') {
+            const options = ManageProject.projects;
+            options.forEach(item => {
+                const option = document.createElement('option');
+                option.textContent = item.title;
+                selectContainer.appendChild(option);
+            });
+        }
+
+        mainContainer.appendChild(containerLabel);
+        mainContainer.appendChild(selectContainer);
+        return mainContainer;
+    }
+
     generateFormDetails() {
         const title = this.formDetails('title', 'form-title', 'label', 'Title: ', 'input', 'text');
         const description = this.formDetails('description', 'form-description', 'label', 'Description: ', 'input', 'text');
         const date = this.formDetails('date', 'form-date', 'label', 'Due Date: ', 'input', 'date');
-        // const submit = this.formDetails('submit', 'form-submit', 'label', '', 'input', 'submit');
+        const priority = this.optionDetails('priority', 'Priority: ');
+        const status = this.optionDetails('status', 'Status: ');
+        const projectParent = this.optionDetails('projectParent', 'Category: ');
+        const submit = this.formDetails('submit', 'form-submit', 'label', '', 'input', 'submit');
 
 
         this.taskFormContainer.appendChild(title);
         this.taskFormContainer.appendChild(description);
         this.taskFormContainer.appendChild(date);
-        // this.taskFormContainer.appendChild(submit);
+        this.taskFormContainer.appendChild(priority);
+        this.taskFormContainer.appendChild(status);
+        this.taskFormContainer.appendChild(projectParent);
+        this.taskFormContainer.appendChild(submit);
     }
 
-    appendBody() {
-        const targetMain = document.querySelector(`.${this.mainContainerName}`);
-        targetMain.appendChild(this.taskFormContainer);
+    appendBody(e) {
+        const targetContainer = e.target.closest(this.mainTarget);
+        const existingContainer = document.querySelector(`.${this.formName}`);
+
+        if (existingContainer) {
+            existingContainer.remove();
+        } else {
+            targetContainer.appendChild(this.taskFormContainer);
+        }
+    }
+}
+
+class SubmitTaskEvent {
+    constructor(mainForm) {
+        this.mainForm = mainForm;
+    }
+
+    addTask() {
+        this.mainForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formContainer = document.querySelector(`.${addTaskForm.formName}`);
+            const getTitle = document.querySelector('#title');
+            const getDescription = document.querySelector('#description');
+            const getDate = document.querySelector('#date');
+            const getPriority = document.querySelector('#priority');
+            const getStatus = document.querySelector('#status');
+            const getProjectParent = document.querySelector('#projectParent');
+            const task = new Task(getTitle.value, getDescription.value, getDate.value, getPriority.value, getStatus.value, getProjectParent.value);
+
+            // Clear form after submit
+            formContainer.remove();
+
+            // Push project into array
+            ManageTask.tasks.push(task);
+            ManageTask.matchContent(ManageTask.tasks);
+
+            // // Re-render MainUI
+            generateMainUI.rebootMainContent(getProjectParent);
+
+            console.log(task);
+            console.log(ManageTask.tasks);
+            console.log(getProjectParent.value);
+        });
     }
 }
 
 export const generateMainUI = new MainUI('.content', 'main-container');
 
 // Add Task
-const addTaskForm = new TaskForm('.task-form-container', 'Add Task', 'content');
-// addTaskForm.appendBody();
+export const addTaskForm = new TaskForm('task-form-container', 'Add Task', 'content', '.main-container');
+export const submitAddTask = new SubmitTaskEvent(addTaskForm.taskFormContainer);
+submitAddTask.addTask();

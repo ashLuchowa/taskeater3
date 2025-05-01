@@ -145,11 +145,11 @@ table {
 }
 
 /*--------- MAIN ---------*/
-.main-container .task-box .outer-task-container {
+.main-container {
   position: relative;
 }
-.main-container .task-box .outer-task-container .task-form-container {
-  position: fixed;
+.main-container .task-form-container {
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -158,6 +158,9 @@ table {
   gap: 10px;
   background-color: rgb(255, 255, 255);
   padding: 20px;
+}
+.main-container .task-box .outer-task-container {
+  position: relative;
 }
 .main-container .task-box .outer-task-container .main-setting {
   position: absolute;

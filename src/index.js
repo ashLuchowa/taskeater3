@@ -5,6 +5,7 @@ import { generateSideUI } from "./dom/sideUI";
 import { generateMainUI } from "./dom/mainUI";
 import { addProjectForm } from "./dom/sideUI";
 import { submitAddProject } from "./dom/sideUI";
+import { addTaskForm } from "./dom/mainUI";
 
 
 function initialiseApp() {
@@ -27,7 +28,7 @@ function initialiseApp() {
 
     // Render Initial Project
     generateMainUI.renderContent('div', 'project-main-title', 'h1', ManageProject.projects[0].title);
-    generateMainUI.renderAddBtn('button', 'project-main-button', 'add-btn', 'Add Task');
+    generateMainUI.renderAddBtn('button', 'task-main-button', 'add-btn', 'Add Task');
     generateMainUI.renderContent('div', 'project-main-description', 'p', ManageProject.projects[0].description);
     generateMainUI.renderTasks(ManageProject.projects[0].taskArray, 'task-box');
 }
