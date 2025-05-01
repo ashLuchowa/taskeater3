@@ -148,44 +148,6 @@ class SideUI {
         }
     }
 
-    // editProject(e) {
-    //     e.preventDefault();
-
-    //     // Target setting parent container title attribute
-    //     const result = e.currentTarget.closest('.project-list-item').getAttribute('data-title');
-
-    //     // Match project array title to target title attribute
-    //     const foundItem = ManageProject.projects.find(item => {
-    //         return item.title === result;
-    //     });
-
-    //     if (foundItem) {
-    //         const formContainer = document.querySelector('.edit-form-container');
-    //         const getProjectTitle = document.querySelector('#title');
-    //         const getProjectDescription = document.querySelector('#description');
-
-    //         // Clear form after submit
-    //         formContainer.remove();
-
-    //         foundItem.title = getProjectTitle.value;
-    //         foundItem.description = getProjectDescription.value;
-
-    //         // Re-render SideUI
-    //         generateSideUI.restartProjectList();
-
-    //         // Reboot Main UI
-    //         const contents = document.querySelectorAll('.main-container div');
-    //         // Clear content first
-    //         contents.forEach((item => {
-    //             item.remove();
-    //         }));
-    //         generateMainUI.renderContent('div', 'project-main-title', 'h1', foundItem.title);
-    //         generateMainUI.renderAddBtn('button', 'project-main-button', 'add-btn', 'Add Task');
-    //         generateMainUI.renderContent('div', 'project-main-description', 'p', foundItem.description);
-    //         generateMainUI.renderTasks(foundItem.taskArray, 'task-box');
-    //     }
-    // }
-
     clearSideUI() {
         const container = document.querySelector('.project-list-container');
         if (container) {
@@ -276,7 +238,7 @@ class SubmitEvent {
         this.mainForm = mainForm;
     }
 
-    submit() {
+    addProject() {
         this.mainForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -295,9 +257,56 @@ class SubmitEvent {
             generateSideUI.restartProjectList();
         });
     }
+
+    editProject() {
+        this.mainForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Target setting parent container title attribute
+            const result = e.currentTarget.closest(editProjectForm.mainTarget).getAttribute('data-title');
+
+            // Match project array title to target title attribute
+            const foundItem = ManageProject.projects.find(item => {
+                return item.title === result;
+            });
+
+            if (foundItem) {
+                const formContainer = document.querySelector('.edit-form-container');
+                const getProjectTitle = document.querySelector('#title');
+                const getProjectDescription = document.querySelector('#description');
+
+                // Clear form after submit
+                formContainer.remove();
+
+                foundItem.title = getProjectTitle.value;
+                foundItem.description = getProjectDescription.value;
+
+                // Re-render SideUI
+                generateSideUI.restartProjectList();
+
+                // Reboot Main UI
+                const contents = document.querySelectorAll('.main-container div');
+                // Clear content first
+                contents.forEach((item => {
+                    item.remove();
+                }));
+                generateMainUI.renderContent('div', 'project-main-title', 'h1', foundItem.title);
+                generateMainUI.renderAddBtn('button', 'project-main-button', 'add-btn', 'Add Task');
+                generateMainUI.renderContent('div', 'project-main-description', 'p', foundItem.description);
+                generateMainUI.renderTasks(foundItem.taskArray, 'task-box');
+            }
+        });
+    }
 }
 
 export const generateSideUI = new SideUI('.content', 'side-container');
+
+// Add Project
 export const addProjectForm = new Form('form', 'add-form-container', 'New Project', '.side-container');
-const editProjectForm = new Form('form', 'edit-form-container', 'Edit Project', '.project-list-item');
 export const submitAddProject = new SubmitEvent(addProjectForm.formContainer);
+submitAddProject.addProject();
+
+// Edit Project
+const editProjectForm = new Form('form', 'edit-form-container', 'Edit Project', '.project-list-item');
+const submitEditProject = new SubmitEvent(editProjectForm.formContainer);
+submitEditProject.editProject();

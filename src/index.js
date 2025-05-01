@@ -20,7 +20,6 @@ function initialiseApp() {
     const addProjectButton = generateSideUI.renderAddBtn('button', 'add-project-btn', 'Add Project');
     generateSideUI.renderProjectList();
     addProjectButton.addEventListener('click', (e) => addProjectForm.appendBody(e));
-    submitAddProject.submit();
 
     // Init Main Content
     generateMainUI.renderMainContainer();
