@@ -310,14 +310,14 @@ class Form {
         this.formContainer.appendChild(submit);
     }
 
-    appendBody() {
-        const contentContainer = document.querySelector(this.mainTarget);
+    appendBody(e) {
+        const targetContainer = e.target.closest(this.mainTarget);
         const existingContainer = document.querySelector(`.${this.formName}`);
 
         if (existingContainer) {
             existingContainer.remove();
         } else {
-            contentContainer.appendChild(this.formContainer);
+            targetContainer.appendChild(this.formContainer);
         }
     }
 }
@@ -349,5 +349,5 @@ class SubmitEvent {
 }
 
 export const generateSideUI = new SideUI('.content', 'side-container');
-export const addForm = new Form('form', 'add-form-container', 'Add Project', '.content');
+export const addForm = new Form('form', 'add-form-container', 'Add Project', '.side-container');
 export const submitAddProject = new SubmitEvent(addForm.formContainer);
