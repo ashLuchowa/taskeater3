@@ -477,4 +477,70 @@ class MainUI {
     }
 }
 
+class TaskForm {
+    constructor(formName, legendName, mainContainerName) {
+        this.formName = formName;
+        this.legendName = legendName;
+        this.mainContainerName = mainContainerName;
+
+        this.taskFormContainer = this.mainForm();
+        this.headerContainer();
+        this.generateFormDetails();
+    }
+
+    mainForm() {
+        const taskFormContainer = document.createElement('form');
+        taskFormContainer.classList.add(this.formName); //task-form-container
+        return taskFormContainer;
+    }
+
+    headerContainer() {
+        const taskFormHeader = document.createElement('legend');
+        taskFormHeader.textContent = this.legendName; //Add/Edit Task
+        this.taskFormContainer.appendChild(taskFormHeader);
+    }
+
+    formDetails(name, className, elementLabel, labelText, elementInput, inputType) {
+        const outerFormItem = document.createElement('div');
+        outerFormItem.classList.add(className);
+
+        // Label
+        const containerLabel = document.createElement(elementLabel);
+        containerLabel.textContent = labelText;
+        containerLabel.setAttribute('for', name);
+        // General Input
+        const containerInput = document.createElement(elementInput);
+        containerInput.setAttribute('type', inputType);
+        containerInput.setAttribute('id', name);
+        containerInput.setAttribute('name', name);
+        containerInput.required = true;
+
+        outerFormItem.appendChild(containerLabel);
+        outerFormItem.appendChild(containerInput);
+        return outerFormItem;
+    }
+
+    generateFormDetails() {
+        const title = this.formDetails('title', 'form-title', 'label', 'Title: ', 'input', 'text');
+        const description = this.formDetails('description', 'form-description', 'label', 'Description: ', 'input', 'text');
+        const date = this.formDetails('date', 'form-date', 'label', 'Due Date: ', 'input', 'date');
+        // const submit = this.formDetails('submit', 'form-submit', 'label', '', 'input', 'submit');
+
+
+        this.taskFormContainer.appendChild(title);
+        this.taskFormContainer.appendChild(description);
+        this.taskFormContainer.appendChild(date);
+        // this.taskFormContainer.appendChild(submit);
+    }
+
+    appendBody() {
+        const targetMain = document.querySelector(`.${this.mainContainerName}`);
+        targetMain.appendChild(this.taskFormContainer);
+    }
+}
+
 export const generateMainUI = new MainUI('.content', 'main-container');
+
+// Add Task
+const addTaskForm = new TaskForm('.task-form-container', 'Add Task', 'content');
+// addTaskForm.appendBody();
