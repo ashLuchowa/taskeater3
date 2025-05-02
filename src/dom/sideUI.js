@@ -252,6 +252,18 @@ class SubmitEvent {
 
             // Push project into array
             ManageProject.projects.push(project);
+            
+            // local Storage
+            let project_serialized = JSON.stringify(ManageProject.projects);
+
+            localStorage.setItem('projects', project_serialized);
+
+            const stored = localStorage.getItem('projects');
+            // let project_deserialized = JSON.parse(stored);
+
+            if(stored) {
+                ManageProject.projects = JSON.parse(stored);
+            }
 
             // Re-render SideUI
             generateSideUI.restartProjectList();

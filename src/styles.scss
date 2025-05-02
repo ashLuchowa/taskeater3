@@ -66,6 +66,7 @@ table {
     gap: 10px;
     background-color: rgb(255, 255, 255);
     padding: 20px;
+    z-index: 100;
   }
 }
 
@@ -107,6 +108,7 @@ table {
           gap: 10px;
           background-color: rgb(255, 255, 255);
           padding: 20px;
+          z-index: 100;
         }
         .side-setting-container {
           background-color: white;
