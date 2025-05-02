@@ -19,8 +19,8 @@ function initialiseApp() {
     generateSideUI.renderSideContainer();
     generateSideUI.renderLogo('Logo');
     const addProjectButton = generateSideUI.renderAddBtn('button', 'add-project-btn', 'Add Project');
-    generateSideUI.renderProjectList();
     addProjectButton.addEventListener('click', (e) => addProjectForm.appendBody(e));
+    generateSideUI.renderProjectList();
 
     // Init Main Content
     generateMainUI.renderMainContainer();
@@ -28,7 +28,7 @@ function initialiseApp() {
 
     // Render Initial Project
     generateMainUI.renderContent('div', 'project-main-title', 'h1', ManageProject.projects[0].title);
-    generateMainUI.renderAddBtn('button', 'task-main-button', 'add-btn', 'Add Task');
+    generateMainUI.renderAddBtn('button', 'project-main-button', 'add-btn', 'Add Task');
     generateMainUI.renderContent('div', 'project-main-description', 'p', ManageProject.projects[0].description);
     generateMainUI.renderTasks(ManageProject.projects[0].taskArray, 'task-box');
 }

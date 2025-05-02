@@ -213,7 +213,7 @@ class MainUI {
 
         if (foundItem) {
             generateMainUI.renderContent('div', 'project-main-title', 'h1', foundItem.title);
-            generateMainUI.renderAddBtn('button', 'project-main-button', 'add-btn', 'Add Task');
+            generateMainUI.renderAddBtn('button', 'task-main-button', 'add-btn', 'Add Task');
             generateMainUI.renderContent('div', 'project-main-description', 'p', foundItem.description);
             generateMainUI.renderTasks(foundItem.taskArray, 'task-box');
         }
@@ -381,7 +381,7 @@ class SubmitTaskEvent {
             const getDate = document.querySelector('#date');
             const getPriority = document.querySelector('#priority');
             const getStatus = document.querySelector('#status');
-            const getProjectParent = document.querySelector('#projectParent');
+            // const getProjectParent = document.querySelector('#projectParent');
 
             // Clear form after submit
             formContainer.remove();
@@ -394,7 +394,7 @@ class SubmitTaskEvent {
                 foundItem.date = getDate.value;
                 foundItem.priority = getPriority.value;
                 foundItem.status = getStatus.value;
-                foundItem.projectParent = getProjectParent.value;
+                // foundItem.projectParent = getProjectParent.value;
             }
 
             // Re-render MainUI
