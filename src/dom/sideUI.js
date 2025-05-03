@@ -17,11 +17,12 @@ class SideUI {
         this.outerContainer.appendChild(this.sideContainer);
     }
 
-    renderLogo(projectTitle) {
+    renderLogo(projectTitle, link) {
         const logoContainer = document.createElement('div');
         logoContainer.classList.add('logo-container');
 
         const logoText = document.createElement('a');
+        logoText.setAttribute('href', link);
         logoText.textContent = projectTitle;
 
         logoContainer.appendChild(logoText);

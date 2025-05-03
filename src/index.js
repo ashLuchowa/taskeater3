@@ -17,7 +17,7 @@ function initialiseApp() {
 
     // Init Sidebar
     generateSideUI.renderSideContainer();
-    generateSideUI.renderLogo('Logo');
+    generateSideUI.renderLogo('TASKEATER', '#');
     const addProjectButton = generateSideUI.renderAddBtn('button', 'add-project-btn', 'Add Project');
     addProjectButton.addEventListener('click', (e) => addProjectForm.appendBody(e));
     generateSideUI.renderProjectList();
