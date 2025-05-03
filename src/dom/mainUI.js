@@ -200,15 +200,17 @@ class MainUI {
         }
     }
 
-    rebootMainContent(projectParent) {
+    rebootMainContent() {
+        const target = document.querySelector('.project-main-title h1');
+
         const contents = document.querySelectorAll('.main-container div');
-        // Clear content first
+        // Clear content
         contents.forEach((item => {
             item.remove();
         }));
 
         const foundItem = ManageProject.projects.find((itemProject) => {
-            return itemProject.title === projectParent.value;
+            return itemProject.title === target.textContent;
         });
 
         if (foundItem) {
@@ -367,7 +369,7 @@ class SubmitTaskEvent {
 
             console.log(task);
             console.log(ManageTask.tasks);
-            console.log(getProjectParent.value);
+            // console.log(getProjectParent.value);
         });
     }
 
