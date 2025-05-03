@@ -366,10 +366,6 @@ class SubmitTaskEvent {
 
             // // Re-render MainUI
             generateMainUI.rebootMainContent(getProjectParent);
-
-            console.log(task);
-            console.log(ManageTask.tasks);
-            // console.log(getProjectParent.value);
         });
     }
 
@@ -415,7 +411,6 @@ class SubmitTaskEvent {
                 generateMainUI.renderAddBtn('button', 'project-main-button', 'add-btn', 'Add Task');
                 generateMainUI.renderContent('div', 'project-main-description', 'p', foundItem2.description);
                 generateMainUI.renderTasks(foundItem2.taskArray, 'task-box');
-                console.log(foundItem2);
             }
         });
     }

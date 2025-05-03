@@ -17,9 +17,9 @@ class SideUI {
         this.outerContainer.appendChild(this.sideContainer);
     }
 
-    renderLogo(projectTitle, link) {
+    renderLogo(containerName, projectTitle, link) {
         const logoContainer = document.createElement('div');
-        logoContainer.classList.add('logo-container');
+        logoContainer.classList.add(containerName);
 
         const logoText = document.createElement('a');
         logoText.setAttribute('href', link);
