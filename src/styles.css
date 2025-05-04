@@ -78,65 +78,6 @@ table {
   padding: 40px 10px;
   background-color: rgb(255, 255, 255);
 }
-.side-container .add-project-btn {
-  background-color: #262626;
-  color: #ffffff;
-  border: none;
-  padding: 7px 10px;
-  border-radius: 7px;
-  font-size: 15px;
-  margin: 20px 0;
-  cursor: pointer;
-}
-.side-container .add-form-container, .side-container .edit-form-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background-color: rgb(255, 255, 255);
-  padding: 20px;
-  z-index: 100;
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px rgb(187, 187, 187);
-}
-.side-container .add-form-container legend, .side-container .edit-form-container legend {
-  font-weight: bold;
-  text-transform: uppercase;
-}
-.side-container .add-form-container .form-title input, .side-container .add-form-container .form-description input, .side-container .edit-form-container .form-title input, .side-container .edit-form-container .form-description input {
-  display: flex;
-  background-color: none;
-  border: 1px solid rgb(0, 0, 0);
-  padding: 3px 0 3px 5px;
-  border-radius: 5px;
-  margin-top: 5px;
-}
-.side-container .add-form-container .form-submit input, .side-container .edit-form-container .form-submit input {
-  background-color: #262626;
-  color: #ffffff;
-  border: none;
-  padding: 7px 10px;
-  border-radius: 7px;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-/*--------- MAIN CONTENT ---------*/
-.task-box {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.task-box .outer-task-container {
-  border: 1px solid black;
-  width: 300px;
-}
-
-/*--------- SIDE ---------*/
 .side-container .logo-container a {
   font-size: 20px;
   font-weight: bold;
@@ -205,12 +146,95 @@ table {
 .side-container .project-list-container li:hover {
   background-color: #D9D9D9;
 }
-
-/*--------- MAIN ---------*/
-.main-container {
+.side-container .add-project-btn {
+  background-color: #262626;
+  color: #ffffff;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-size: 15px;
+  margin: 20px 0;
+  cursor: pointer;
+}
+.side-container .add-form-container, .side-container .edit-form-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: rgb(255, 255, 255);
   padding: 20px;
+  z-index: 100;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgb(187, 187, 187);
+}
+.side-container .add-form-container legend, .side-container .edit-form-container legend {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.side-container .add-form-container .form-title input, .side-container .add-form-container .form-description input, .side-container .edit-form-container .form-title input, .side-container .edit-form-container .form-description input {
+  display: flex;
+  background-color: none;
+  border: 1px solid rgb(0, 0, 0);
+  padding: 3px 0 3px 5px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+.side-container .add-form-container .form-submit input, .side-container .edit-form-container .form-submit input {
+  background-color: #262626;
+  color: #ffffff;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/*--------- MAIN CONTENT ---------*/
+.task-box {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.task-box .outer-task-container {
+  border: 1px solid black;
+  width: 300px;
+}
+
+.main-container {
+  padding: 40px 40px;
   background-color: #D9D9D9;
   position: relative;
+}
+.main-container .project-main-title {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgb(182, 182, 182);
+}
+.main-container .project-main-title h1 {
+  display: flex;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #262626;
+}
+.main-container .project-main-title .add-btn {
+  background-color: #262626;
+  color: #ffffff;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.main-container .project-main-description {
+  font-size: 15px;
+  color: #2b2b2b;
 }
 .main-container .task-form-container {
   position: absolute;

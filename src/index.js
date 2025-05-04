@@ -31,6 +31,10 @@ function initialiseApp() {
     generateMainUI.renderAddBtn('button', 'project-main-button', 'add-btn', 'Add Task');
     generateMainUI.renderContent('div', 'project-main-description', 'p', ManageProject.projects[0].description);
     generateMainUI.renderTasks(ManageProject.projects[0].taskArray, 'task-box');
+
+    const containerTitle = document.querySelector('.project-main-title');
+    const buttonContainer = document.querySelector('.add-btn');
+    containerTitle.appendChild(buttonContainer);
 }
 
 initialiseApp();

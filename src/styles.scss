@@ -72,73 +72,6 @@ $font-para: 15px;
 
 /*--------- SIDEBAR ---------*/
 .side-container {
-  padding: 40px 10px;
-  background-color: rgb(255, 255, 255);
-  .add-project-btn {
-    background-color: #262626;
-    color: #ffffff;
-    border: none;
-    padding: 7px 10px;
-    border-radius: 7px;
-    font-size: $font-para;
-    margin: 20px 0;
-    cursor: pointer;
-  }
-  .add-form-container, .edit-form-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: rgb(255, 255, 255);
-    padding: 20px;
-    z-index: 100;
-    border-radius: 10px;
-    box-shadow: 2px 2px 4px rgb(187, 187, 187);
-    legend {
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-    .form-title, .form-description {
-      input {
-        display: flex;
-        background-color: none;
-        border: 1px solid rgb(0, 0, 0);
-        padding: 3px 0 3px 5px;
-        border-radius: 5px;
-        margin-top: 5px;
-      }
-    }
-    .form-submit {
-      input {
-        background-color: #262626;
-        color: #ffffff;
-        border: none;
-        padding: 7px 10px;
-        border-radius: 7px;
-        font-size: $font-para;
-        cursor: pointer;
-      }
-    }
-  }
-}
-
-/*--------- MAIN CONTENT ---------*/
-.task-box {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    .outer-task-container {
-        border: 1px solid black;
-        width: 300px;
-    }
-}
-
-/*--------- SIDE ---------*/
-.side-container {
   .logo-container {
     a {
       font-size: 20px;
@@ -214,13 +147,102 @@ $font-para: 15px;
       }
     }
   }
+  padding: 40px 10px;
+  background-color: rgb(255, 255, 255);
+  .add-project-btn {
+    background-color: #262626;
+    color: #ffffff;
+    border: none;
+    padding: 7px 10px;
+    border-radius: 7px;
+    font-size: $font-para;
+    margin: 20px 0;
+    cursor: pointer;
+  }
+  .add-form-container, .edit-form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    z-index: 100;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgb(187, 187, 187);
+    legend {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .form-title, .form-description {
+      input {
+        display: flex;
+        background-color: none;
+        border: 1px solid rgb(0, 0, 0);
+        padding: 3px 0 3px 5px;
+        border-radius: 5px;
+        margin-top: 5px;
+      }
+    }
+    .form-submit {
+      input {
+        background-color: #262626;
+        color: #ffffff;
+        border: none;
+        padding: 7px 10px;
+        border-radius: 7px;
+        font-size: $font-para;
+        cursor: pointer;
+      }
+    }
+  }
 }
 
-/*--------- MAIN ---------*/
+/*--------- MAIN CONTENT ---------*/
+.task-box {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .outer-task-container {
+        border: 1px solid black;
+        width: 300px;
+    }
+}
+
 .main-container {
-  padding: 20px;
+  padding: 40px 40px;
   background-color: #D9D9D9;
   position: relative;
+  .project-main-title {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(182, 182, 182);
+    h1 {
+      display: flex;
+      font-size: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #262626;
+    }
+    .add-btn {
+      background-color: #262626;
+      color: #ffffff;
+      border: none;
+      padding: 7px 10px;
+      border-radius: 7px;
+      font-size: $font-para;
+      cursor: pointer;
+    }
+  }
+  .project-main-description {
+    font-size: $font-para;
+    color: #2b2b2b;
+  }
   .task-form-container {
     position: absolute;
     top: 50%;
