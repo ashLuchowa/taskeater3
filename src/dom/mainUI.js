@@ -1,4 +1,3 @@
-import { restartMainContent } from "..";
 import { ManageProject } from "../events/manageProjects";
 import { ManageTask, Task } from "../events/manageTasks";
 

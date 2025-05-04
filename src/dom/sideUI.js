@@ -1,6 +1,5 @@
 import { ManageProject } from "../events/manageProjects";
 import { Project } from "../events/manageProjects";
-import { restartProjectList } from "..";
 import { generateMainUI } from "./mainUI";
 
 class SideUI {

@@ -4,8 +4,6 @@ import { ManageTask } from "./events/manageTasks";
 import { generateSideUI } from "./dom/sideUI";
 import { generateMainUI } from "./dom/mainUI";
 import { addProjectForm } from "./dom/sideUI";
-import { submitAddProject } from "./dom/sideUI";
-import { addTaskForm } from "./dom/mainUI";
 
 
 function initialiseApp() {
